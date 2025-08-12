@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trisiro — 3D Prints (Dominican Republic)</title>
+  <meta name="description" content="Trisiro — 3D printed parts, minis and functional prints. Contact via WhatsApp to order." />
+  <meta property="og:title" content="Trisiro - 3D Prints" />
+  <meta property="og:description" content="3D printed minis and functional parts. Message us on WhatsApp to order." />
+  <style>
+    :root{--accent:#1fb954;--bg:#0f0f12;--card:#111217;--muted:#9aa0a6}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#08080a 0%, #0f1114 100%);color:#e9eef1;line-height:1.4}
+    header{padding:28px 20px;display:flex;align-items:center;gap:12px}
+    .logo{font-weight:800;font-size:20px;letter-spacing:0.6px}
+    .tag{color:var(--muted);font-size:13px}
+    .hero{padding:14px 20px 28px}
+    .hero-grid{display:grid;grid-template-columns:1fr;gap:18px;max-width:1100px;margin:0 auto}
+    .intro{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
+    .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px}
+    .card{background:var(--card);padding:10px;border-radius:10px;overflow:hidden}
+    .card img{width:100%;height:200px;object-fit:cover;border-radius:6px}
+    .meta{display:flex;justify-content:space-between;margin-top:8px;font-size:14px;color:var(--muted)}
+    .cta{display:flex;gap:10px;margin-top:12px}
+    .btn{background:var(--accent);color:#021006;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
+    footer{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+    /* floating WA button */
+    .wa-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25D366,#128C7E);border-radius:999px;padding:14px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.35);text-decoration:none;color:white;font-weight:700}
+    @media(min-width:900px){ .hero-grid{grid-template-columns:1fr 420px} .intro{height:100%} .gallery img{height:240px} }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Trisiro</div>
+    <div class="tag">3D prints — República Dominicana</div>
+  </header>
+
+  <main class="hero">
+    <div class="hero-grid">
+      <div>
+        <div class="intro">
+          <h1>Impresiones 3D — pedidos por WhatsApp</h1>
+          <p style="color:var(--muted)">Miniaturas, piezas funcionales, prototipos y reparaciones. Haz click en una foto para ver detalles y presiona <strong>Contactar</strong> para pedir presupuesto.</p>
+
+          <div class="gallery" id="gallery">
+            <!-- replace these image files with your prints -->
+            <figure class="card">
+              <img src="1.webp" alt="Miniatura 1" loading="lazy">
+              <figcaption class="meta"><span>Miniatura — 45 mm</span><span>$RD$ 500</span></figcaption>
+            </figure>
+
+            <figure class="card">
+              <img src="2.avif" alt="Parte funcional" loading="lazy">
+              <figcaption class="meta"><span>Soporte — PLA+PETG</span><span>$RD$ 350</span></figcaption>
+            </figure>
+
+            <figure class="card">
+              <img src="3.webp" alt="Prototipo" loading="lazy">
+              <figcaption class="meta"><span>Prototipo — Densidad 25%</span><span>$RD$ 1200</span></figcaption>
+            </figure>
+          </div>
+
+          <div class="cta">
+            <a id="waContact" class="btn" href="#" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
+            <a class="btn secondary" href="mailto:hello@trisiro.com">Preguntas — Email</a>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div style="background:var(--card);padding:14px;border-radius:12px;">
+          <h3>¿Cómo pedir?</h3>
+          <ol style="color:var(--muted);padding-left:18px;margin-top:8px">
+            <li>Elige el modelo o envía tu diseño (.stl)</li>
+            <li>Indica material y acabado</li>
+            <li>Te doy precio y tiempo por WhatsApp</li>
+          </ol>
+          <h4 style="margin-top:12px">Formas de pago</h4>
+          <p style="color:var(--muted);margin:6px 0">Transferencia bancaria, PayPal, o efectivo al recoger.</p>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    © <span id="year"></span> Trisiro — Hecho con impresora 3D • Local pickup / envío RD
+  </footer>
+
+  <!-- floating whatsapp button -->
+  <a id="waFab" class="wa-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
+    🟢 WhatsApp • Pedir ahora
+  </a>
+
+  <script>
+    // EDIT THIS: your phone in international format WITHOUT the plus '+' or spaces
+    // For DR: country code 1, so example '18091234567' (1 + 809 + local)
+    const PHONE = '1849487900';
+    const DEFAULT_MESSAGE = 'Hola!%20Quiero%20informaci%C3%B3n%20sobre%20tus%20impresiones%203D.%20Modelo:%20(poner%20modelo%20aqui)';
+    // Build link safely
+    function waLink(phone, text) {
+      const msg = text || '';
+      if (phone && phone.length) {
+        return 'https://wa.me/' + encodeURIComponent(phone) + '?text=' + (msg ? encodeURIComponent(msg) : '');
+      }
+      // fallback to open generic WA with message
+      return 'https://wa.me/?text=' + encodeURIComponent(msg);
+    }
+
+    // set link targets
+    const waUrl = waLink(PHONE, 'Hola! Estoy interesado en impresiones 3D. ¿Tienes disponibilidad?');
+    document.getElementById('waContact').href = waUrl;
+    document.getElementById('waFab').href = waUrl;
+
+    // small polish
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
