@@ -1,122 +1,416 @@
-<!doctype html>
+<!-- ============== index.html ============== -->
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Triziro — 3D Prints (Dominican Republic)</title>
-  <meta name="description" content="Trisiro — 3D printed parts, minis and functional prints. Contact via WhatsApp to order." />
-  <meta property="og:title" content="Trisiro - 3D Prints" />
-  <meta property="og:description" content="3D printed minis and functional parts. Message us on WhatsApp to order." />
-  <style>
-    :root{--accent:#1fb954;--bg:#0f0f12;--card:#111217;--muted:#9aa0a6}
-    *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,Arial;background:linear-gradient(180deg,#08080a 0%, #0f1114 100%);color:#e9eef1;line-height:1.4}
-    header{padding:28px 20px;display:flex;align-items:center;gap:12px}
-    .logo{font-weight:800;font-size:20px;letter-spacing:0.6px}
-    .tag{color:var(--muted);font-size:13px}
-    .hero{padding:14px 20px 28px}
-    .hero-grid{display:grid;grid-template-columns:1fr;gap:18px;max-width:1100px;margin:0 auto}
-    .intro{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);padding:18px;border-radius:12px}
-    .gallery{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin-top:12px}
-    .card{background:var(--card);padding:10px;border-radius:10px;overflow:hidden}
-    .card img{width:100%;height:200px;object-fit:cover;border-radius:6px}
-    .meta{display:flex;justify-content:space-between;margin-top:8px;font-size:14px;color:var(--muted)}
-    .cta{display:flex;gap:10px;margin-top:12px}
-    .btn{background:var(--accent);color:#021006;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
-    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:#fff}
-    footer{padding:20px;text-align:center;color:var(--muted);font-size:13px}
-    /* floating WA button */
-    .wa-fab{position:fixed;right:18px;bottom:18px;background:linear-gradient(180deg,#25D366,#128C7E);border-radius:999px;padding:14px 16px;display:flex;align-items:center;gap:10px;box-shadow:0 6px 18px rgba(0,0,0,0.35);text-decoration:none;color:white;font-weight:700}
-    @media(min-width:900px){ .hero-grid{grid-template-columns:1fr 420px} .intro{height:100%} .gallery img{height:240px} }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Triziro — Impresión 3D</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <meta name="description" content="Triziro — Impresión 3D personalizada, prototipos y producción en RD." />
 </head>
 <body>
-  <header>
-    <div class="logo">Triziro</div>
-    <div class="tag">3D prints — República Dominicana</div>
+  <!-- Header -->
+  <header class="header">
+    <div class="container header__inner">
+      <a href="#home" class="logo">Triziro</a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#home">Inicio</a>
+        <a href="#products">Productos</a>
+        <a href="#services">Servicios</a>
+        <a href="#about">Nosotros</a>
+        <a href="#testimonials">Clientes</a>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn-ghost" href="https://wa.me/18494879000?text=Hola%20Triziro%2C%20quiero%20informaci%C3%B3n%20sobre%20impresi%C3%B3n%203D" target="_blank" rel="noopener">Contacto</a>
+        <button id="cartButton" class="cart-btn" aria-label="Abrir carrito">
+          <span class="cart-btn__icon">🛒</span>
+          <span id="cartCount" class="cart-btn__count">0</span>
+        </button>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">☰</button>
+    </div>
   </header>
 
-  <main class="hero">
-    <div class="hero-grid">
-      <div>
-        <div class="intro">
-          <h1>Impresiones 3D — pedidos por WhatsApp</h1>
-          <p style="color:var(--muted)">Miniaturas, piezas funcionales, prototipos y reparaciones. Haz click en una foto para ver detalles y presiona <strong>Contactar</strong> para pedir presupuesto.</p>
+  <!-- Mobile Nav -->
+  <nav class="nav-mobile" id="navMobile">
+    <a href="#home">Inicio</a>
+    <a href="#products">Productos</a>
+    <a href="#services">Servicios</a>
+    <a href="#about">Nosotros</a>
+    <a href="#testimonials">Clientes</a>
+    <a href="https://wa.me/18494879000?text=Hola%20Triziro%2C%20quiero%20informaci%C3%B3n%20sobre%20impresi%C3%B3n%203D" target="_blank" rel="noopener">Whatsapp</a>
+  </nav>
 
-          <div class="gallery" id="gallery">
-            <!-- replace these image files with your prints -->
-            <figure class="card">
-              <img src="1.webp" alt="Miniatura 1" loading="lazy">
-              <figcaption class="meta"><span>Cover celular</span><span>RD$ 500</span></figcaption>
-            </figure>
-
-            <figure class="card">
-              <img src="2.avif" alt="Parte funcional" loading="lazy">
-              <figcaption class="meta"><span>Maceta para Plantas</span><span>RD$ 350</span></figcaption>
-            </figure>
-
-            <figure class="card">
-              <img src="3.webp" alt="Prototipo" loading="lazy">
-              <figcaption class="meta"><span>Miniatura perro</span><span>RD$ 1200</span></figcaption>
-            </figure>
-          </div>
-
-          <div class="cta">
-            <a id="waContact" class="btn" href="#" target="_blank" rel="noopener noreferrer">Contactar por WhatsApp</a>
-            <a class="btn secondary" href="mailto:hello@trisiro.com">Preguntas — Email</a>
-          </div>
+  <!-- Hero -->
+  <section id="home" class="hero container">
+    <div class="hero__grid">
+      <div class="hero__text">
+        <h1>Impresión 3D <span class="grad">cómoda y moderna</span></h1>
+        <p>Convertimos tu idea en piezas reales: prototipos rápidos, piezas funcionales y regalos personalizados en República Dominicana.</p>
+        <div class="hero__actions">
+          <a href="#products" class="btn btn-primary">Comprar ahora</a>
+          <a href="#services" class="btn btn-outline">Ver servicios</a>
         </div>
       </div>
-
-      <aside>
-        <div style="background:var(--card);padding:14px;border-radius:12px;">
-          <h3>¿Cómo pedir?</h3>
-          <ol style="color:var(--muted);padding-left:18px;margin-top:8px">
-            <li>Elige el modelo o envía tu diseño (.stl)</li>
-            <li>Indica material y acabado</li>
-            <li>Te doy precio y tiempo por WhatsApp</li>
-          </ol>
-          <h4 style="margin-top:12px">Formas de pago</h4>
-          <p style="color:var(--muted);margin:6px 0">Transferencia bancaria, PayPal, o efectivo al recoger.</p>
-        </div>
-      </aside>
+      <div class="hero__image">
+        <img src="Boom.jpg" alt="Impresora 3D trabajando" />
+      </div>
     </div>
-  </main>
+  </section>
 
-  <footer>
-    © <span id="year"></span> Trisiro — Hecho con impresora 3D • Local pickup / envío RD
+  <!-- Collections (similar idea to SITE123 categories) -->
+  <section class="collections container">
+    <h2>Colecciones</h2>
+    <div class="chips">
+      <button class="chip" data-filter="all">Todos</button>
+      <button class="chip" data-filter="decor">Decoración</button>
+      <button class="chip" data-filter="hogar">Hogar</button>
+      <button class="chip" data-filter="prototipo">Prototipos</button>
+      <button class="chip" data-filter="figuras">Figuras</button>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="products container">
+    <h2>Productos Destacados</h2>
+    <div class="grid" id="productGrid">
+      <!-- Each card has data attributes used by JS (id, name, price, tags, image) -->
+      <article class="card" data-id="p1" data-name="Soporte de Teléfono" data-price="450" data-tags="hogar" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Soporte de Teléfono 3D" />
+          <span class="badge">Nuevo</span>
+        </div>
+        <h3>Soporte de Teléfono</h3>
+        <p class="price">RD$ 450</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p2" data-name="Jarrón Paramétrico" data-price="690" data-tags="decor" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Jarrón impreso en 3D" />
+        </div>
+        <h3>Jarrón Paramétrico</h3>
+        <p class="price">RD$ 690</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p3" data-name="Dragón Articulado" data-price="850" data-tags="figuras" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Dragón articulado 3D" />
+          <span class="badge badge--sale">-10%</span>
+        </div>
+        <h3>Dragón Articulado</h3>
+        <p class="price">RD$ 850</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p4" data-name="Lámpara Litofanía" data-price="1450" data-tags="hogar" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Lámpara litofanía" />
+        </div>
+        <h3>Lámpara Litofanía</h3>
+        <p class="price">RD$ 1,450</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p5" data-name="Set Ajedrez" data-price="1200" data-tags="hogar" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Piezas de ajedrez impresas" />
+        </div>
+        <h3>Set Ajedrez</h3>
+        <p class="price">RD$ 1,200</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p6" data-name="Llavero Personalizado" data-price="250" data-tags="decor" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Llavero personalizado" />
+        </div>
+        <h3>Llavero Personalizado</h3>
+        <p class="price">RD$ 250</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p7" data-name="Engranaje Funcional" data-price="520" data-tags="prototipo" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Engranaje impreso 3D" />
+        </div>
+        <h3>Engranaje Funcional</h3>
+        <p class="price">RD$ 520</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+
+      <article class="card" data-id="p8" data-name="Figura Coleccionable" data-price="980" data-tags="figuras" data-image="Boom.jpg">
+        <div class="card__image">
+          <img src="Boom.jpg" alt="Figura coleccionable" />
+        </div>
+        <h3>Figura Coleccionable</h3>
+        <p class="price">RD$ 980</p>
+        <div class="card__actions">
+          <button class="btn btn-ghost details-btn">Detalles</button>
+          <button class="btn btn-primary add-btn">Añadir</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="services container">
+    <h2>Servicios</h2>
+    <div class="grid grid--services">
+      <div class="service">
+        <h3>Diseño 3D a medida</h3>
+        <p>Modelado personalizado para tu proyecto (STL/OBJ). Revisión de archivos y asesoría de materiales.</p>
+      </div>
+      <div class="service">
+        <h3>Prototipado Rápido</h3>
+        <p>Itera tu idea con tiempos de entrega ágiles y precisión en tolerancias.</p>
+      </div>
+      <div class="service">
+        <h3>Producción en Volumen</h3>
+        <p>Pedidos por lote con control de calidad y empaque listo para vender.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="about container">
+    <h2>Sobre Nosotros</h2>
+    <p>Somos un equipo apasionado por la fabricación digital. Usamos FDM y resina para lograr resultados limpios y resistentes. En Triziro convertimos ideas en objetos reales con un trato cercano y tiempos confiables.</p>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials container">
+    <h2>Lo que dicen nuestros clientes</h2>
+    <div class="grid grid--testimonials">
+      <blockquote>“La cabraa.” — Merny.</blockquote>
+      <blockquote>“Entregaron rápido y exactamente como pedí.” — elpepe.</blockquote>
+      <blockquote>“Son duro.” — nose.</blockquote>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p>© 2025 Triziro · Todos los derechos reservados</p>
+      <a class="link" href="https://wa.me/18494879000?text=Hola%20Triziro" target="_blank" rel="noopener">WhatsApp</a>
+    </div>
   </footer>
 
-  <!-- floating whatsapp button -->
-  <a id="waFab" class="wa-fab" href="#" target="_blank" rel="noopener noreferrer" aria-label="Contactar por WhatsApp">
-    🟢 WhatsApp • Pedir ahora
-  </a>
+  <!-- Product Details Modal -->
+  <div id="modal" class="modal" aria-hidden="true" role="dialog">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+    <div class="modal__dialog" role="document">
+      <button class="modal__close" id="modalClose" aria-label="Cerrar">×</button>
+      <div class="modal__content">
+        <img id="modalImg" src="" alt="Detalle" />
+        <div class="modal__text">
+          <h3 id="modalTitle"></h3>
+          <p class="price" id="modalPrice"></p>
+          <button id="modalAdd" class="btn btn-primary">Añadir al carrito</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+  <aside id="cart" class="cart" aria-label="Carrito">
+    <div class="cart__header">
+      <h3>Tu Carrito</h3>
+      <button id="closeCart" class="icon-btn" aria-label="Cerrar">×</button>
+    </div>
+    <div id="cartItems" class="cart__items"></div>
+    <div class="cart__footer">
+      <div class="cart__totals">
+        <div class="row"><span>Subtotal</span><strong id="subtotal">RD$ 0</strong></div>
+        <div class="row hint">El envío se coordina por WhatsApp.</div>
+      </div>
+      <div class="cart__actions">
+        <button id="clearCart" class="btn btn-ghost">Vaciar</button>
+        <button id="checkout" class="btn btn-success">Ordenar por WhatsApp</button>
+        <button id="continue" class="btn btn-outline">Seguir comprando</button>
+      </div>
+    </div>
+  </aside>
 
   <script>
-    // EDIT THIS: your phone in international format WITHOUT the plus '+' or spaces
-    // For DR: country code 1, so example '18091234567' (1 + 809 + local)
+    // ------- State -------
     const PHONE = '18494879000';
-    const DEFAULT_MESSAGE = 'Hola!%20Quiero%20informaci%C3%B3n%20sobre%20tus%20impresiones%203D.%20Modelo:%20(poner%20modelo%20aqui)';
-    // Build link safely
-    function waLink(phone, text) {
-      const msg = text || '';
-      if (phone && phone.length) {
-        return 'https://wa.me/' + encodeURIComponent(phone) + '?text=' + (msg ? encodeURIComponent(msg) : '');
-      }
-      // fallback to open generic WA with message
-      return 'https://wa.me/?text=' + encodeURIComponent(msg);
+    const currency = x => `RD$ ${x.toLocaleString('es-DO', { minimumFractionDigits: 0 })}`;
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    let cart = JSON.parse(localStorage.getItem('triziro_cart') || '[]');
+
+    // ------- Nav (mobile) -------
+    const hamburger = $('#hamburger');
+    const navMobile = $('#navMobile');
+    if (hamburger) {
+      hamburger.addEventListener('click', () => navMobile.classList.toggle('open'));
+      navMobile.addEventListener('click', () => navMobile.classList.remove('open'));
     }
 
-    // set link targets
-    const waUrl = waLink(PHONE, 'Hola! Estoy interesado en impresiones 3D. ¿Tienes disponibilidad?');
-    document.getElementById('waContact').href = waUrl;
-    document.getElementById('waFab').href = waUrl;
+    // ------- Filters -------
+    $$('.chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const f = chip.dataset.filter;
+        $$('.chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        $$('#productGrid .card').forEach(card => {
+          const tags = (card.dataset.tags || '').split(',');
+          card.style.display = (f === 'all' || tags.includes(f)) ? '' : 'none';
+        });
+      });
+    });
 
-    // small polish
-    document.getElementById('year').textContent = new Date().getFullYear();
+    // ------- Product interactions -------
+    const productFromCard = (card) => ({
+      id: card.dataset.id,
+      name: card.dataset.name,
+      price: Number(card.dataset.price),
+      image: card.dataset.image,
+      qty: 1,
+    });
+
+    const addToCart = (item) => {
+      const existing = cart.find(p => p.id === item.id);
+      if (existing) existing.qty += 1; else cart.push(item);
+      saveCart();
+      openCart();
+    };
+
+    const saveCart = () => {
+      localStorage.setItem('triziro_cart', JSON.stringify(cart));
+      renderCart();
+    };
+
+    const removeFromCart = (id) => {
+      cart = cart.filter(p => p.id !== id);
+      saveCart();
+    };
+
+    const changeQty = (id, delta) => {
+      const item = cart.find(p => p.id === id);
+      if (!item) return;
+      item.qty += delta;
+      if (item.qty <= 0) removeFromCart(id); else saveCart();
+    };
+
+    const renderCart = () => {
+      const itemsEl = $('#cartItems');
+      const countEl = $('#cartCount');
+      itemsEl.innerHTML = '';
+      let subtotal = 0;
+      cart.forEach(item => {
+        subtotal += item.price * item.qty;
+        const row = document.createElement('div');
+        row.className = 'cart__item';
+        row.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" />
+          <div class="cart__info">
+            <strong>${item.name}</strong>
+            <div class="muted">${currency(item.price)} c/u</div>
+            <div class="qty">
+              <button class="icon-btn" data-act="dec">-</button>
+              <span>${item.qty}</span>
+              <button class="icon-btn" data-act="inc">+</button>
+              <button class="icon-btn danger" data-act="rm">×</button>
+            </div>
+          </div>
+          <div class="cart__line">${currency(item.price * item.qty)}</div>
+        `;
+        row.querySelector('[data-act="dec"]').addEventListener('click', () => changeQty(item.id, -1));
+        row.querySelector('[data-act="inc"]').addEventListener('click', () => changeQty(item.id, 1));
+        row.querySelector('[data-act="rm"]').addEventListener('click', () => removeFromCart(item.id));
+        itemsEl.appendChild(row);
+      });
+      $('#subtotal').textContent = currency(subtotal);
+      countEl.textContent = cart.reduce((a, b) => a + b.qty, 0);
+    };
+
+    // Bind Add + Details
+    $$('#productGrid .card').forEach(card => {
+      card.querySelector('.add-btn').addEventListener('click', () => addToCart(productFromCard(card)));
+      card.querySelector('.details-btn').addEventListener('click', () => openModal(productFromCard(card)));
+    });
+
+    // ------- Modal -------
+    const modal = $('#modal');
+    const modalImg = $('#modalImg');
+    const modalTitle = $('#modalTitle');
+    const modalPrice = $('#modalPrice');
+    const modalAdd = $('#modalAdd');
+    let modalCurrent = null;
+
+    function openModal(p) {
+      modalCurrent = p;
+      modalImg.src = p.image;
+      modalImg.alt = p.name;
+      modalTitle.textContent = p.name;
+      modalPrice.textContent = currency(p.price);
+      modal.classList.add('open');
+    }
+    function closeModal() { modal.classList.remove('open'); }
+    $('#modalClose').addEventListener('click', closeModal);
+    $('#modalBackdrop').addEventListener('click', closeModal);
+    modalAdd.addEventListener('click', () => { addToCart(modalCurrent); closeModal(); });
+
+    // ------- Cart Drawer -------
+    const cartBtn = $('#cartButton');
+    const cartEl = $('#cart');
+    const overlay = $('#overlay');
+    const closeCartBtn = $('#closeCart');
+    const continueBtn = $('#continue');
+    const clearBtn = $('#clearCart');
+    const checkoutBtn = $('#checkout');
+
+    const openCart = () => { cartEl.classList.add('open'); overlay.classList.add('show'); renderCart(); };
+    const closeCart = () => { cartEl.classList.remove('open'); overlay.classList.remove('show'); };
+
+    cartBtn.addEventListener('click', openCart);
+    closeCartBtn.addEventListener('click', closeCart);
+    continueBtn.addEventListener('click', closeCart);
+    overlay.addEventListener('click', closeCart);
+    clearBtn.addEventListener('click', () => { cart = []; saveCart(); });
+
+    checkoutBtn.addEventListener('click', () => {
+      if (!cart.length) { alert('Tu carrito está vacío.'); return; }
+      const lines = cart.map((it, idx) => `${idx+1}. ${it.name} x${it.qty} — ${currency(it.price * it.qty)}`);
+      const total = cart.reduce((s, it) => s + it.price * it.qty, 0);
+      const msg = `Hola Triziro! Quiero hacer este pedido:%0A%0A${lines.join('%0A')}
+%0A%0ATotal: ${currency(total)}%0A%0ADatos:%0ANombre:%0ADirección:%0AMétodo de pago:`;
+      window.location.href = `https://wa.me/${PHONE}?text=${msg}`;
+    });
+
+    // Init
+    renderCart();
   </script>
 </body>
 </html>
-
-
-
